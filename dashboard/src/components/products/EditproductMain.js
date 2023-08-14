@@ -22,6 +22,8 @@ const EditProductMain = (props) => {
   const { productId } = props;
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [dept, setDept] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -42,12 +44,14 @@ const EditProductMain = (props) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      toast.success("Product Updated", ToastObjects);
+      toast.success("Employee Updated", ToastObjects);
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(editProduct(productId));
       } else {
         setName(product.name);
+        setEmail(product.email);
+        setDept(product.dept);
         setDescription(product.description);
         setCountInStock(product.countInStock);
         setImage(product.image);
@@ -62,6 +66,8 @@ const EditProductMain = (props) => {
       updateProduct({
         _id: productId,
         name,
+        email,
+        dept,
         price,
         description,
         image,
@@ -77,12 +83,12 @@ const EditProductMain = (props) => {
         <form onSubmit={submitHandler}>
           <div className="content-header">
             <Link to="/products" className="btn btn-danger text-white">
-              Go to products
+              Go to People
             </Link>
-            <h2 className="content-title">Update Product</h2>
+            <h2 className="content-title">Update Employee</h2>
             <div>
               <button type="submit" className="btn btn-primary">
-                Publish now
+                Update now
               </button>
             </div>
           </div>
@@ -103,7 +109,7 @@ const EditProductMain = (props) => {
                     <>
                       <div className="mb-4">
                         <label htmlFor="product_title" className="form-label">
-                          Product title
+                        Employee Name
                         </label>
                         <input
                           type="text"
@@ -116,8 +122,36 @@ const EditProductMain = (props) => {
                         />
                       </div>
                       <div className="mb-4">
+                        <label htmlFor="product_email" className="form-label">
+                        Employee Email
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          className="form-control"
+                          id="product_email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label htmlFor="product_department" className="form-label">
+                        Employee Department
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          className="form-control"
+                          id="product_department"
+                          required
+                          value={dept}
+                          onChange={(e) => setDept(e.target.value)}
+                        />
+                      </div>                      
+                      <div className="mb-4">
                         <label htmlFor="product_price" className="form-label">
-                          Price
+                        Experience
                         </label>
                         <input
                           type="number"
@@ -130,25 +164,24 @@ const EditProductMain = (props) => {
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="product_price" className="form-label">
-                          Count In Stock
+                        <label htmlFor="product_salary" className="form-label">
+                          Salary
                         </label>
                         <input
                           type="number"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_price"
+                          id="product_salary"
                           required
                           value={countInStock}
                           onChange={(e) => setCountInStock(e.target.value)}
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="form-label">Description</label>
+                        <label className="form-label">Job Designation</label>
                         <textarea
                           placeholder="Type here"
                           className="form-control"
-                          rows="7"
                           required
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}

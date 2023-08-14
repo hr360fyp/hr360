@@ -4,21 +4,21 @@ import Header from "../components/Header";
 import axios from "axios";
 
 const Payroll = () => {
-  const [people, setPeople] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/people/")
+      .get("/api/products/")
       .then((res) => {
         console.log("res", res);
-        setPeople(res.data.people);
+        setProducts(res.data.products);
       })
       .catch((err) => {
         console.log("error", err);
       });
   }, []);
 
-  console.log("people", people);
+  console.log("products", products);
 
   return (
     <>
@@ -44,14 +44,14 @@ const Payroll = () => {
             </thead>
             <tbody>
               {/* Add table rows dynamically with employee data */}
-              {people.length ? (
-                people.map((people) => (
-                  <tr key={people.id}>
-                    <td>{people.name}</td>
-                    <td>{people.email}</td>
-                    <td>{people.dept}</td>
-                    <td>{people.description}</td>
-                    <td>{people.countInStock}</td>
+              {products.length ? (
+                products.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.name}</td>
+                    <td>{product.email}</td>
+                    <td>{product.dept}</td>
+                    <td>{product.description}</td>
+                    <td>{product.countInStock}</td>
                   </tr>
                 ))
               ) : (

@@ -30,8 +30,8 @@ const EditTicketMain = (props) => {
 
   const dispatch = useDispatch();
 
-  const people = useSelector(({peopleList}) => peopleList.people)
-  console.log("people",people)
+  const products = useSelector(({productList}) => productList.products)
+  console.log("products",products)
 
   const ticketEdit = useSelector((state) => state.ticketEdit);
   const { loading, error, ticket } = ticketEdit;
@@ -161,9 +161,9 @@ const EditTicketMain = (props) => {
                           onChange={(e) => setAsgnto(e.target.value)}
                         >
                           <option value="">Select an option</option>
-                          {people.map((people) => (
-                            <option key={people._id} value={people.name}>
-                              {people.name}
+                          {products.map((product) => (
+                            <option key={product._id} value={product.name}>
+                              {product.name}
                             </option>
                           ))}
                         </select>

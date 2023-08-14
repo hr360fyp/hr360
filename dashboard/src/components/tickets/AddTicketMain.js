@@ -24,8 +24,8 @@ const AddTicketMain = () => {
 
   const dispatch = useDispatch();
 
-  const people = useSelector(({peopleList}) => peopleList.people)
-  console.log("people",people)
+  const products = useSelector(({productList}) => productList.products)
+  console.log("products",products)
 
   const ticketCreate = useSelector((state) => state.ticketCreate);
   const { loading, error, ticket } = ticketCreate;
@@ -124,9 +124,9 @@ const AddTicketMain = () => {
                       onChange={(e) => setAsgnto(e.target.value)}
                     >
                       <option id= "" value="">Select an Employee</option>
-                      {people.map((people) => (
-                        <option key={people._id} value={people.name}>
-                          {people.name}
+                      {products.map((product) => (
+                        <option key={product._id} value={product.name}>
+                          {product.name}
                         </option>
                       ))}
                     </select>

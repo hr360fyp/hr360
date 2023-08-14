@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Attendance = () => {
-  const people = useSelector(({ peopleList }) => peopleList.people);
+  const products = useSelector(({ productList }) => productList.products);
   const [attendances, setAttendances] = useState([]);
 
   useEffect(() => {
@@ -57,12 +57,12 @@ const Attendance = () => {
             </thead>
             <tbody>
               {/* Add table rows dynamically with employee data */}
-              {people.length ? (
-                people.map((people) => (
-                  <tr key={people._id}>
-                    <td>{people.name}</td>
-                    <td>{people.email}</td>
-                    <td>{calculateAttendanceSum(people.email)}</td>
+              {products.length ? (
+                products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.email}</td>
+                    <td>{calculateAttendanceSum(product.email)}</td>
                   </tr>
                 ))
               ) : (

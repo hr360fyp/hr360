@@ -10,8 +10,22 @@
   /* tablet devices */
   .main-wrap {
     margin-left: 220px;
+    display: flex;
+    flex-direction: column;
   }
-
+    
+  .content-main {
+    padding: 10px;
+  }
+  .content-header2 {
+    margin-bottom: 10px;
+  }
+  .text-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .navbar-aside {
     max-width: 220px;
   }
@@ -24,7 +38,19 @@
   .itemlist .col-check {
     display: none;
   }
-
+ .sidebar {
+    display: none;
+  }
+  .main-wrap {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .content-main {
+    padding: 5px;
+  }
+  .content-title {
+    font-size: 24px;
+  }
   .card-header .col-check {
     display: none;
   }
@@ -34,7 +60,28 @@
   .mobile-block {
     display: block !important;
   }
-
+  .header {
+    display: none;
+  }
+  .main-wrap {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .content-main {
+    padding: 5px;
+  }
+  .content-title {
+    font-size: 20px;
+  }
+  .text-area {
+    margin-top: 10px;
+  }
+  .input-group {
+    margin-bottom: 10px;
+  }
+  .send-button {
+    margin-top: 10px;
+  }
   .mobile-hide {
     display: none !important;
   }

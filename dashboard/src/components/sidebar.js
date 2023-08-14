@@ -38,20 +38,10 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/products"
+                to="/register"
               >
-                <i className="icon fas fa-shopping-bag"></i>
-                <span className="text">Products</span>
-              </NavLink>
-            </li>
-            <li className="menu-item">
-              <NavLink
-                activeClassName="active"
-                className="menu-link"
-                to="/addproduct"
-              >
-                <i className="icon fas fa-cart-plus"></i>
-                <span className="text">Add product</span>
+               <i className="icon fas fa-regular fa-id-card"></i>
+                <span className="text">Create Account</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -60,41 +50,82 @@ const Sidebar = () => {
                 className="menu-link"
                 to="/orders"
               >
-                <i className="icon fas fa-bags-shopping"></i>
-                <span className="text">Orders</span>
+                <i className="icon fas fa-solid fa-building"></i>
+                <span className="text">Department </span>
               </NavLink>
             </li>
             <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/users"
+                to="/products"
               >
-                <i className="icon fas fa-user"></i>
-                <span className="text">Users</span>
+                <i className="icon fas fa-solid fa-user"></i>
+                <span className="text">People </span>
               </NavLink>
             </li>
             <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/sellers"
+                to="/addproduct"
               >
-                <i className="icon fas fa-store-alt"></i>
-                <span className="text">Sellers</span>
+                <i className="icon fas fa-solid fa-user-plus"></i>
+                <span className="text">Add People</span>
               </NavLink>
             </li>
-
+            
             <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/transaction"
+                to="/tickets"
               >
-                <i className="icon fas fa-usd-circle"></i>
-                <span className="text">Transactions</span>
+                <i className="icon fas fa-ticket-alt"></i>
+                <span className="text">Tickets</span>
               </NavLink>
             </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/Payroll"
+              >
+                <i className="icon fas fa-regular fa-sack-dollar"></i>
+                <span className="text">Payroll</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              { <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/Attendance"
+              >
+                <i className="icon fas fa-sharp fa-solid fa-clipboard-check"></i>
+                <span className="text">Attendance</span>
+              </NavLink> }
+            </li>
+            <li className="menu-item">
+              { <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/Feedback"
+              >
+               <i className="icon fas fa-solid fa-comment-lines"></i>
+                <span className="text">Feedback</span>
+              </NavLink> }
+            </li>
+            <li className="menu-item">
+              { <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/calendar"
+              >
+                <i className="icon fas fa-calendar"></i>
+                <span className="text">Team Calendar</span>
+              </NavLink> }
+            </li>
+            
           </ul>
           <br />
           <br />
