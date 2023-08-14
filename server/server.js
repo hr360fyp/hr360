@@ -25,17 +25,6 @@ app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
-// Connect to MongoDB
-mongoose.connect("mongodb+srv://hr360fyp:ZhcrE2oyzf9qw2Ui@hr360.jdb3jcg.mongodb.net/shop?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
-
 // Define message schema
 const messageSchema = new mongoose.Schema({
   recipient: String,
