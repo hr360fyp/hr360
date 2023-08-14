@@ -8,8 +8,8 @@ import Message from "../LoadingError/Error";
 const Ticket = () => {
   const dispatch = useDispatch();
 
-  const people = useSelector(({ peopleList }) => peopleList.people);
-  console.log("people", people);
+  const products = useSelector(({ productList }) => productList.products);
+  console.log("products", products);
 
   const [isDeleted, setIsDeleted] = useState(false); // State variable to track deletion status
 

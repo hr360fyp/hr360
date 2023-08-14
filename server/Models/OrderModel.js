@@ -1,72 +1,54 @@
 import mongoose from "mongoose";
 
-const orderSchema = mongoose.Schema(
+const reviewSchema = mongoose.Schema(
   {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
-    orderItems: [
-      {
-        name: { type: String, required: true },
-        qty: { type: Number, required: true },
-        image: { type: String, required: true },
-        price: { type: Number, required: true },
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "Product",
-        },
-      },
-    ],
-    shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
-    },
-    paymentMethod: {
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const orderSchema = mongoose.Schema(
+  {
+    name: {
       type: String,
       required: true,
-      default: "Paypal",
     },
-    paymentResult: {
-      id: { type: String },
-      status: { type: String },
-      update_time: { type: String },
-      email_address: { type: String },
+    head: {
+      type: String,
+      required: true,
     },
-    taxPrice: {
+    temp: {
       type: Number,
       required: true,
-      default: 0.0,
+      default: 0,
     },
-    shippingPrice: {
+    tpd: {
       type: Number,
       required: true,
-      default: 0.0,
+      default: 0,
     },
-    totalPrice: {
+    tsales: {
       type: Number,
       required: true,
-      default: 0.0,
+      default: 0,
     },
-    isPaid: {
-      type: Boolean,
+    rem: {
+      type: Number,
       required: true,
-      default: false,
+      default: 0,
     },
-    paidAt: {
-      type: Date,
-    },
-    isDelivered: {
-      type: Boolean,
+    pstatus: {
+      type: String,
       required: true,
-      default: false,
-    },
-    deliveredAt: {
-      type: Date,
     },
   },
   {

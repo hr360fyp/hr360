@@ -11,9 +11,9 @@ userRouter.post(
   "/login",
   asyncHandler(async (req, res) => {
     const { role, email, password } = req.body;
-    const user = await User.findOne({email });
+    const user = await User.findOne({ role, email });
 
-    if (role === "employee" && user && (await user.matchPassword(password))) {
+    if (role === "Admin" && user && (await user.matchPassword(password))) {
       res.json({
         _id: user._id,
         role: user.role,
@@ -23,7 +23,30 @@ userRouter.post(
         token: generateToken(user._id),
         createdAt: user.createdAt,
       });
-    } else {
+    }
+    else if (role === "Employee" && user && (await user.matchPassword(password))) {
+      res.json({
+        _id: user._id,
+        role: user.role,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+        createdAt: user.createdAt,
+      });
+    } 
+    else if (role === "Client" && user && (await user.matchPassword(password))) {
+      res.json({
+        _id: user._id,
+        role: user.role,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+        createdAt: user.createdAt,
+      });
+    } 
+    else {
       res.status(401);
       throw new Error("Invalid Credentials");
     }
@@ -36,7 +59,7 @@ userRouter.post(
   asyncHandler(async (req, res) => {
     const { role, name, email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ role, email });
 
     if (userExists) {
       res.status(400);
@@ -131,4 +154,12 @@ userRouter.get(
   })
 );
 
+// GET ALL USER 
+userRouter.get(
+  "/getusers",
+  asyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+  })
+);
 export default userRouter;

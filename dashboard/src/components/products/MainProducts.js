@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,8 @@ const MainProducts = () => {
   const productDelete = useSelector((state) => state.productDelete);
   const { error: errorDelete, success: successDelete } = productDelete;
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch, successDelete]);
@@ -22,7 +24,7 @@ const MainProducts = () => {
   return (
     <section className="content-main">
       <div className="content-header">
-        <h2 className="content-title">Products</h2>
+        <h2 className="content-title">People Management</h2>
         <div>
           <Link to="/addproduct" className="btn btn-primary">
             Create new
@@ -38,22 +40,9 @@ const MainProducts = () => {
                 type="search"
                 placeholder="Search..."
                 className="form-control p-2"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>All category</option>
-                <option>Electronics</option>
-                <option>Clothings</option>
-                <option>Something else</option>
-              </select>
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
-              </select>
             </div>
           </div>
         </header>
@@ -69,9 +58,13 @@ const MainProducts = () => {
           ) : (
             <div className="row">
               {/* Products */}
-              {products.map((product) => (
-                <Product product={product} key={product._id} />
-              ))}
+              {products
+                .filter((product) =>
+                  product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                .map((product) => (
+                  <Product product={product} key={product._id} />
+                ))}
             </div>
           )}
 

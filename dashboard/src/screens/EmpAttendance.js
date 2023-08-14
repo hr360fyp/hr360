@@ -1,40 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import EmpSidebar from "../components/EmpSidebar";
 import EmpHeader from "../components/EmpHeader";
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 const Attendance = () => {
+  // const [products, setProducts]=useState([])
 
-  const people = useSelector(({peopleList}) => peopleList.people)
+  const products = useSelector(({productList}) => productList.products)
 
-  console.log("people",people)
-
-  const [attendances, setAttendances] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/api/attendance")
-      .then((res) => {
-        setAttendances(res.data);
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-  }, []);
-
-    // Calculate the sum of attendance for each unique email address
-    const calculateAttendanceSum = (email) => {
-      const attendanceList = attendances.filter(
-        (attendance) => attendance.employeeEmail === email
-      );
-      const attendanceSum = attendanceList.reduce(
-        (sum, attendance) => sum + attendance.attendance,
-        0
-      );
-      return attendanceSum;
-    };
-
+  // useEffect(() => {
+  //   axios.get("/api/products/getproducts")
+  //   .then((res)=>{
+  //     console.log("res",res)
+  //     setProducts(res.data)
+  //   })
+  //   .catch((err)=>{
+  //     console.log("error",err)
+  //   })
+  // }, [])
+  console.log("products",products)
   return (
     <>
       <EmpSidebar />
@@ -57,12 +41,12 @@ const Attendance = () => {
             </thead>
             <tbody>
               {/* Add table rows dynamically with employee data */}
-              {people.length? people.map((people)=>{
+              {products.length? products.map((product)=>{
                 return(
-                  <tr key={people._id}>
-                    <td>{people.name}</td>
-                    <td>{people.email}</td>
-                    <td>{calculateAttendanceSum(people.email)}</td>
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.email}</td>
+                    <td>--</td>
                   </tr>
                 )
               }):"no data"}

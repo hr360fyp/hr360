@@ -1,6 +1,6 @@
 import React from "react";
 
-const PrintComponent = React.forwardRef(({ people }, ref) => {
+const PrintComponent = React.forwardRef(({ products }, ref) => {
   return (
     <div ref={ref}>
       <h1>Print Component</h1>
@@ -15,13 +15,13 @@ const PrintComponent = React.forwardRef(({ people }, ref) => {
           </tr>
         </thead>
         <tbody>
-          {people.map((people) => (
-            <tr key={people.id}>
-              <td>{people.name}</td>
-              <td>{people.email}</td>
-              <td>{people.dept}</td>
-              <td>{people.description}</td>
-              <td>{people.countInStock}</td>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.email}</td>
+              <td>{product.dept}</td>
+              <td>{product.description}</td>
+              <td>{product.countInStock}</td>
             </tr>
           ))}
         </tbody>

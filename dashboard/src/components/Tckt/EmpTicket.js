@@ -8,8 +8,8 @@ import Message from "../LoadingError/Error";
 const EmpTicket = () => {
   const dispatch = useDispatch();
 
-  const people = useSelector(({ peopleList }) => peopleList.people);
-  console.log("people", people);
+  const products = useSelector(({ productList }) => productList.products);
+  console.log("products", products);
 
   const ticketList = useSelector((state) => state.ticketList);
   const { loading, error, tickets } = ticketList;

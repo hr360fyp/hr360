@@ -3,6 +3,12 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userListReducer, userLoginReducer } from "./Reducers/userReducers";
 import {
+  registerDetailsReducer,
+  registerLoginReducer,
+  registerRegisterReducer,
+  registerUpdateProfileReducer,
+} from "./Reducers/RegisterReducers";
+import {
   productCreateReducer,
   productDeleteReducer,
   productEditReducer,
@@ -10,12 +16,26 @@ import {
   productUpdateReducer,
 } from "./Reducers/ProductReducers";
 import {
-  orderDeliveredReducer,
-  orderDetailsReducer,
+  orderCreateReducer,
+  orderDeleteReducer,
+  orderEditReducer,
   orderListReducer,
+  orderUpdateReducer,
 } from "./Reducers/OrderReducers";
+import {
+  ticketCreateReducer,
+  ticketDeleteReducer,
+  ticketEditReducer,
+  ticketListReducer,
+  ticketUpdateReducer,
+} from "./Reducers/TicketReducers";
 
 const reducer = combineReducers({
+  registerLogin: registerLoginReducer,
+  registerRegister: registerRegisterReducer,
+  registerDetails: registerDetailsReducer,
+  registerUpdateProfile: registerUpdateProfileReducer,
+
   userLogin: userLoginReducer,
   userList: userListReducer,
   productList: productListReducer,
@@ -23,10 +43,20 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   productEdit: productEditReducer,
   productUpdate: productUpdateReducer,
+  
   orderList: orderListReducer,
-  orderDetails: orderDetailsReducer,
-  orderDeliver: orderDeliveredReducer,
+  orderDelete: orderDeleteReducer,
+  orderCreate: orderCreateReducer,
+  orderEdit: orderEditReducer,
+  orderUpdate: orderUpdateReducer,
+
+  ticketList: ticketListReducer,
+  ticketDelete: ticketDeleteReducer,
+  ticketCreate: ticketCreateReducer,
+  ticketEdit: ticketEditReducer,
+  ticketUpdate: ticketUpdateReducer,
 });
+
 
 // login
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")

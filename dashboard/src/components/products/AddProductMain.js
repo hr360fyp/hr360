@@ -16,6 +16,8 @@ const ToastObjects = {
 };
 const AddProductMain = () => {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [dept, setDept] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -28,9 +30,11 @@ const AddProductMain = () => {
 
   useEffect(() => {
     if (product) {
-      toast.success("Product Added", ToastObjects);
+      toast.success("Employee Added", ToastObjects);
       dispatch({ type: PRODUCT_CREATE_RESET });
       setName("");
+      setEmail("");
+      setDept("");
       setDescription("");
       setCountInStock(0);
       setImage("");
@@ -40,7 +44,7 @@ const AddProductMain = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, price, description, image, countInStock));
+    dispatch(createProduct(name, email, dept, price, description, image, countInStock));
   };
 
   return (
@@ -50,12 +54,12 @@ const AddProductMain = () => {
         <form onSubmit={submitHandler}>
           <div className="content-header">
             <Link to="/products" className="btn btn-danger text-white">
-              Go to products
+              Go to People
             </Link>
-            <h2 className="content-title">Add product</h2>
+            <h2 className="content-title">Add New Employee</h2>
             <div>
               <button type="submit" className="btn btn-primary">
-                Publish now
+                Create now
               </button>
             </div>
           </div>
@@ -68,7 +72,7 @@ const AddProductMain = () => {
                   {loading && <Loading />}
                   <div className="mb-4">
                     <label htmlFor="product_title" className="form-label">
-                      Product title
+                      Employee Name
                     </label>
                     <input
                       type="text"
@@ -81,8 +85,36 @@ const AddProductMain = () => {
                     />
                   </div>
                   <div className="mb-4">
+                    <label htmlFor="product_email" className="form-label">
+                      Employee Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="product_department" className="form-label">
+                      Employee Department
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_department"
+                      required
+                      value={dept}
+                      onChange={(e) => setDept(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4">
                     <label htmlFor="product_price" className="form-label">
-                      Price
+                      Experience
                     </label>
                     <input
                       type="number"
@@ -95,25 +127,24 @@ const AddProductMain = () => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_price" className="form-label">
-                      Count In Stock
+                    <label htmlFor="product_salary" className="form-label">
+                      Salary
                     </label>
                     <input
                       type="number"
                       placeholder="Type here"
                       className="form-control"
-                      id="product_price"
+                      id="product_salary"
                       required
                       value={countInStock}
                       onChange={(e) => setCountInStock(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
-                    <label className="form-label">Description</label>
+                    <label className="form-label">Job Designation</label>
                     <textarea
                       placeholder="Type here"
                       className="form-control"
-                      rows="7"
                       required
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}

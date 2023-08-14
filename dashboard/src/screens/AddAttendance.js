@@ -16,20 +16,20 @@ const ToastObjects = {
 };
 
 const AddAttendance = () => {
-  const people = useSelector(({ peopleList }) => peopleList.people);
+  const products = useSelector(({ productList }) => productList.products);
 
   const [error, setError] = useState("");
 
   const handlePublishNow = async () => {
-    const attendanceData = people.map((people) => {
+    const attendanceData = products.map((product) => {
       const attendanceInput = document.querySelector(
-        `input[name=attendance_${people._id}]:checked`
+        `input[name=attendance_${product._id}]:checked`
       );
       const attendanceValue = attendanceInput ? +attendanceInput.value : undefined; // Convert to a number
 
       return {
-        employeeName: people.name,
-        employeeEmail: people.email,
+        employeeName: product.name,
+        employeeEmail: product.email,
         attendance: attendanceValue,
       };
     });
@@ -89,16 +89,16 @@ const AddAttendance = () => {
             </thead>
             <tbody>
               {/* Add table rows dynamically with employee data */}
-              {people.length ? (
-                people.map((people) => (
-                  <tr key={people._id}>
-                    <td>{people.name}</td>
-                    <td>{people.email}</td>
+              {products.length ? (
+                products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.email}</td>
                     <td>
                       <span className="absent">
                         <input
                           type="radio"
-                          name={`attendance_${people._id}`}
+                          name={`attendance_${product._id}`}
                           value={1} // Set the value as 1 for absence
                         />{" "}
                         Absent
@@ -106,7 +106,7 @@ const AddAttendance = () => {
                       <span>
                         <input
                           type="radio"
-                          name={`attendance_${people._id}`}
+                          name={`attendance_${product._id}`}
                           value={0} // Set the value as 0 for presence
                         />{" "}
                         Present

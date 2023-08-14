@@ -114,7 +114,7 @@ productRoute.post(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, email, dept, price, description, image, countInStock } = req.body;
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -122,6 +122,8 @@ productRoute.post(
     } else {
       const product = new Product({
         name,
+        email,
+        dept,
         price,
         description,
         image,
@@ -145,10 +147,12 @@ productRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, email, dept, price, description, image, countInStock } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
+      product.email = email || product.email;
+      product.dept = dept || product.dept;
       product.price = price || product.price;
       product.description = description || product.description;
       product.image = image || product.image;
@@ -162,4 +166,14 @@ productRoute.put(
     }
   })
 );
+
+// GET ALL PRODUCT 
+productRoute.get(
+  "/getproducts",
+  asyncHandler(async (req, res) => {
+    const products = await Product.find({});
+    res.json(products);
+  })
+);
+
 export default productRoute;
