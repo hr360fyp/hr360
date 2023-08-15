@@ -30,6 +30,34 @@ const AddTicketMain = () => {
   const ticketCreate = useSelector((state) => state.ticketCreate);
   const { loading, error, ticket } = ticketCreate;
 
+  const handleDescriptionChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDescription(filteredValue);
+  };
+
+  const handlePriorityChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setPriority(filteredValue);
+  };
+
+  const handleCreatedByChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setCreatedBy(filteredValue);
+  };
+
+  const handleStatusChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setStatus(filteredValue);
+  };
+
   useEffect(() => {
     if (ticket) {
       toast.success("Ticket Added", ToastObjects);
@@ -81,7 +109,7 @@ const AddTicketMain = () => {
                       id="ticket_desc"
                       required
                       value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      onChange={handleDescriptionChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -95,7 +123,7 @@ const AddTicketMain = () => {
                       id="ticket_priority"
                       required
                       value={priority}
-                      onChange={(e) => setPriority(e.target.value)}
+                      onChange={handlePriorityChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -109,7 +137,7 @@ const AddTicketMain = () => {
                       id="ticket_crtby"
                       required
                       value={crtby}
-                      onChange={(e) => setCreatedBy(e.target.value)}
+                      onChange={handleCreatedByChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -136,7 +164,7 @@ const AddTicketMain = () => {
                       Deadline
                     </label>
                     <input
-                      type="text"
+                      type="date"
                       placeholder="Type here"
                       className="form-control"
                       id="ticket_deadline"
@@ -156,7 +184,7 @@ const AddTicketMain = () => {
                       id="ticket_status"
                       required
                       value={status}
-                      onChange={(e) => setStatus(e.target.value)}
+                      onChange={handleStatusChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                 </div>

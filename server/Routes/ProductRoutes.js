@@ -53,44 +53,6 @@ productRoute.get(
   })
 );
 
-// PRODUCT REVIEW
-productRoute.post(
-  "/:id/review",
-  protect,
-  asyncHandler(async (req, res) => {
-    const { rating, comment } = req.body;
-    const product = await Product.findById(req.params.id);
-
-    if (product) {
-      const alreadyReviewed = product.reviews.find(
-        (r) => r.user.toString() === req.user._id.toString()
-      );
-      if (alreadyReviewed) {
-        res.status(400);
-        throw new Error("Product already Reviewed");
-      }
-      const review = {
-        name: req.user.name,
-        rating: Number(rating),
-        comment,
-        user: req.user._id,
-      };
-
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-        product.reviews.length;
-
-      await product.save();
-      res.status(201).json({ message: "Reviewed Added" });
-    } else {
-      res.status(404);
-      throw new Error("Product not Found");
-    }
-  })
-);
-
 // DELETE PRODUCT
 productRoute.delete(
   "/:id",
@@ -114,7 +76,7 @@ productRoute.post(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, email, dept, price, description, image, countInStock } = req.body;
+    const { name, email, dept, experience, designation, image, salary } = req.body;
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -124,10 +86,10 @@ productRoute.post(
         name,
         email,
         dept,
-        price,
-        description,
+        experience,
+        designation,
         image,
-        countInStock,
+        salary,
         user: req.user._id,
       });
       if (product) {
@@ -147,16 +109,16 @@ productRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, email, dept, price, description, image, countInStock } = req.body;
+    const { name, email, dept, experience, designation, image, salary } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
       product.email = email || product.email;
       product.dept = dept || product.dept;
-      product.price = price || product.price;
-      product.description = description || product.description;
+      product.experience = experience || product.experience;
+      product.designation = designation || product.designation;
       product.image = image || product.image;
-      product.countInStock = countInStock || product.countInStock;
+      product.salary = salary || product.salary;
 
       const updatedProduct = await product.save();
       res.json(updatedProduct);

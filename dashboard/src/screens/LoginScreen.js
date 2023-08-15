@@ -49,8 +49,7 @@ const Login = ({ history }) => {
       <Toast />
       <img
         src="/images/logo.png"
-        style={{ width: 350, height: 130, marginLeft: 620, marginTop: 100 }}
-        className="logo"
+        className="logo1"
         alt="HR 360 Icon"
       />
       <div className="card shadow mx-auto" style={{ maxWidth: "380px" }}>

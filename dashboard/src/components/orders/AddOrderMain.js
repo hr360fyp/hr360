@@ -29,6 +29,27 @@ const AddOrderMain = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, error, order } = orderCreate;
 
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setName(filteredValue);
+  };
+
+  const handleHeadChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setHead(filteredValue);
+  };
+
+  const handlePstatusChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setPstatus(filteredValue);
+  };
+
   useEffect(() => {
     if (order) {
       toast.success("Department Added", ToastObjects);
@@ -82,7 +103,7 @@ const AddOrderMain = () => {
                       id="department_title"
                       required
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={handleNameChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -96,7 +117,7 @@ const AddOrderMain = () => {
                       id="department_head"
                       required
                       value={head}
-                      onChange={(e) => setHead(e.target.value)}
+                      onChange={handleHeadChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -104,7 +125,7 @@ const AddOrderMain = () => {
                       Total Employees
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       placeholder="Type here"
                       className="form-control"
                       id="department_temp"
@@ -166,9 +187,8 @@ const AddOrderMain = () => {
                       id="department_status"
                       required
                       value={pstatus}
-                      onChange={(e) => setPstatus(e.target.value)}
+                      onChange={handlePstatusChange} // Use the custom handler to filter non-alphabet characters
                     />
-
                   </div>
                 </div>
               </div>

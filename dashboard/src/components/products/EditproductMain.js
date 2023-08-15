@@ -24,15 +24,36 @@ const EditProductMain = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [dept, setDept] = useState("");
-  const [price, setPrice] = useState(0);
+  const [experience, setExperience] = useState(0);
   const [image, setImage] = useState("");
-  const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
+  const [salary, setSalary] = useState(0);
+  const [designation, setDesignation] = useState("");
 
   const dispatch = useDispatch();
 
   const productEdit = useSelector((state) => state.productEdit);
   const { loading, error, product } = productEdit;
+
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setName(filteredValue);
+  };
+
+  const handleDeptChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDept(filteredValue);
+  };
+
+  const handleDesignationChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDesignation(filteredValue);
+  };
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
@@ -52,10 +73,10 @@ const EditProductMain = (props) => {
         setName(product.name);
         setEmail(product.email);
         setDept(product.dept);
-        setDescription(product.description);
-        setCountInStock(product.countInStock);
+        setDesignation(product.designation);
+        setSalary(product.salary);
         setImage(product.image);
-        setPrice(product.price);
+        setExperience(product.experience);
       }
     }
   }, [product, dispatch, productId, successUpdate]);
@@ -68,10 +89,10 @@ const EditProductMain = (props) => {
         name,
         email,
         dept,
-        price,
-        description,
+        experience,
+        designation,
         image,
-        countInStock,
+        salary,
       })
     );
   };
@@ -108,73 +129,73 @@ const EditProductMain = (props) => {
                   ) : (
                     <>
                       <div className="mb-4">
-                        <label htmlFor="product_title" className="form-label">
+                        <label htmlFor="employee_title" className="form-label">
                         Employee Name
                         </label>
                         <input
                           type="text"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_title"
+                          id="employee_title"
                           required
                           value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          onChange={handleNameChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="product_email" className="form-label">
+                        <label htmlFor="employee_email" className="form-label">
                         Employee Email
                         </label>
                         <input
                           type="text"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_email"
+                          id="employee_email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="product_department" className="form-label">
+                        <label htmlFor="employee_department" className="form-label">
                         Employee Department
                         </label>
                         <input
                           type="text"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_department"
+                          id="employee_department"
                           required
                           value={dept}
-                          onChange={(e) => setDept(e.target.value)}
+                          onChange={handleDeptChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>                      
                       <div className="mb-4">
-                        <label htmlFor="product_price" className="form-label">
+                        <label htmlFor="employee_experience" className="form-label">
                         Experience
                         </label>
                         <input
                           type="number"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_price"
+                          id="employee_experience"
                           required
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
+                          value={experience}
+                          onChange={(e) => setExperience(e.target.value)}
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="product_salary" className="form-label">
+                        <label htmlFor="employee_salary" className="form-label">
                           Salary
                         </label>
                         <input
                           type="number"
                           placeholder="Type here"
                           className="form-control"
-                          id="product_salary"
+                          id="employee_salary"
                           required
-                          value={countInStock}
-                          onChange={(e) => setCountInStock(e.target.value)}
+                          value={salary}
+                          onChange={(e) => setSalary(e.target.value)}
                         />
                       </div>
                       <div className="mb-4">
@@ -183,8 +204,8 @@ const EditProductMain = (props) => {
                           placeholder="Type here"
                           className="form-control"
                           required
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
+                          value={designation}
+                          onChange={handleDesignationChange} // Use the custom handler to filter non-alphabet characters
                         ></textarea>
                       </div>
                       <div className="mb-4">
