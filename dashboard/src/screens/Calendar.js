@@ -142,7 +142,7 @@ const Calendar1 = () => {
                 handleEventDelete(event);
               }
             }}
-            style={{ height: "520px", padding: "20px" }}
+            style={{ height: "520px" }}
           />
         </main>
       </div>

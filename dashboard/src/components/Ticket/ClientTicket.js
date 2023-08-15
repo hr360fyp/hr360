@@ -55,7 +55,7 @@ const ClientTicket = () => {
         </header>
 
         {/* Card */}
-        <div className="card-body">
+        <div className="card2-body">
           {loading ? (
             <Loading />
           ) : error ? (
@@ -64,11 +64,11 @@ const ClientTicket = () => {
             <div className="row row-cols-1 row-cols-sm-3 row-cols-lg-3">
               {filteredTickets.map((ticket) => (
                 <div className="col" key={ticket._id}>
-                  <div className="card card-user shadow-sm">
+                  <div className="card2 card2-user shadow-sm">
                     <div className="card-header">
                       Created by: {ticket.crtby}
                     </div>
-                    <div className="card-body">
+                    <div className="card2-body">
                       <h5 className="card-title mt-2">
                         Description: {ticket.description}
                       </h5>

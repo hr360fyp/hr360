@@ -1,6 +1,6 @@
 const products = [
   {
-    name: "Velcro Ballerinas For Girls  (Pink)",
+    name: "Awais Zafar",
     email: "qwerty567@gmail.com",
     dept: "Product Development",
     image: "/images/6.png",
@@ -10,7 +10,7 @@ const products = [
     salary: 3,
   },
   {
-    name: "Velcro Sneakers For Boys & Girls  (Blue)",
+    name: "Hashim Ali",
     email: "qwerty56@gmail.com",
     dept: "App Development",
     image: "/images/5.png",
@@ -20,7 +20,7 @@ const products = [
     salary: 10,
   },
   {
-    name: "Sesame Street Unisex-Child ELMO Puppet Slipper",
+    name: "Mubashir Javed",
     email: "qwerty5@gmail.com",
     dept: "Website Development",
     image: "/images/4.png",
@@ -30,7 +30,7 @@ const products = [
     salary: 0,
   },
   {
-    name: "Lace Casual Boots For Boys & Girls  (Tan)",
+    name: "Qasim Akram",
     email: "qwerty6@gmail.com",
     dept: "Business Development",
     image: "/images/3.png",
@@ -40,7 +40,7 @@ const products = [
     salary: 10,
   },
   {
-    name: "Lace Walking Shoes For Boys & Girls  (Pink)",
+    name: "Salman Sheikh",
     email: "qwerty756@gmail.com",
     dept: "Product Development",
     image: "/images/2.png",
@@ -50,7 +50,7 @@ const products = [
     salary: 7,
   },
   {
-    name: "Women Red Heels Sandal",
+    name: "Muhammad Usman",
     email: "qwerty576@gmail.com",
     dept: "Product Development",
     image: "/images/1.png",
