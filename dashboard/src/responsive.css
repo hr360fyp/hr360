@@ -87,20 +87,145 @@
   }
 
   select#Role{
-    width: 308px;
+    width: 298px;
     height: 35px;
   }
 
-  img.logo{
+  select#Role.form-control2{
+    width: 300px;
+    height: 38px;
+  }
+
+  img.logo1{
     margin-left: 47px;
     margin-top: 40px;
     width: 250px;
     height: 110px;
   }
 
-  iframe{
-    width: 310px;
+  input.form-control{
+    width: 298px;
   }
+
+  textarea.form-control{
+    width: 298px;
+  }
+
+  select#ticket_asgnto{
+    width: 298px;
+  }
+
+  table.table2{
+    width: 406px;
+    height: 641px;
+    margin-top: 1px;
+  }
+
+  div.att-header{
+    width: 320px;
+    margin-left: 10px;
+  }
+
+  img.logo{
+    margin-right: 40px;
+    margin-top: 40px;
+    width: 250px;
+    height: 110px;
+  }
+
+  a.btn2.btn-sm.btn2-outline-success{
+    width: 288px;
+    margin-left: 16px;
+    margin-top: 10px;
+  }
+
+  a.btn2.btn-sm.btn2-outline-danger{
+    width: 288px;
+    margin-left: 16px;
+  }
+
+  div.message-area{
+    width: 330px;
+  }
+
+  div.text-area{
+    width: 330px;
+  }
+
+  h2.content-title{
+    margin-right: 235px;
+    width: 250px;
+  }
+
+  span.rbc-toolbar-label{
+    margin-left: 18px;
+  }
+
+  div.rbc-calendar{
+    width: 350px;
+    margin-right: 100px;
+    padding: 8px;
+  }
+
+  span.rbc-toolbar-label{
+    margin-top: 20px;
+  }
+
+  button.send-button{
+    margin-right: 930px;
+  }
+
+  .captcha{
+    margin-left: 0px;
+  }
+
+  iframe{ 
+    width: 2988px;
+    height: auto;
+  }
+
+  iframe.video-player{
+    width: 330px;
+    height: 450px;
+  }
+
+   .rc-anchor-logo-portrait{
+    margin-left: 120px;
+   }
+
+  button.btn.btn-submit{
+    width: 298px;
+    color: #fff;
+    background-color: #20AE64;
+  }
+
+  div.card.card-product-grid.shadow-sm{
+    width: 298px;
+    height: 555px;
+  }
+
+  div.card.card-user.shadow-sm{
+    width: 298px;
+    height: 380px;
+  }
+
+  div.card-body{
+    width: 298px;
+  }
+
+  div.messages{
+    width: 291px;
+    margin-left: 0px;
+  }
+
+  .card-body{
+    width: 330px;
+  }
+
+  div.card{
+    width: 330px;
+  }
+
 
   .main-wrap {
     padding-top: 10px;

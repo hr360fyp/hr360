@@ -101,7 +101,7 @@ const Login = ({ history }) => {
             </div>
 
             <div className="mb-4">
-              <button type="submit" className="btn btn-primary w-100">
+              <button type="submit" className="btn btn-submit">
                 Login
               </button>
             </div>

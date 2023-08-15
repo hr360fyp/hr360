@@ -691,6 +691,15 @@ img.logo1{
   margin-top: 100px;
 }
 
+img.logo2{
+  width: 236px; 
+  height: 100px; 
+}
+
+div.aside-top{
+  margin-right: 20px;
+}
+
 
 /* --------- description list --------*/
 [class*="dlist"] {
@@ -1186,4 +1195,63 @@ a.btn2.btn-sm.btn2-outline-danger:hover{
   color: #dc3545;
   border-color: #dc3545;
   background-color: #dc3545;
+}
+
+
+div.card-header{
+  background-color: #20AE64;
+  position: relative;
+  height: 50px;
+  text-align: center;
+}
+
+div.card2.card2-user.shadow-sm{
+  height: 250px;
+}
+
+.card2-user{
+  margin-bottom: 20px;
+}
+
+.card2-user .card2-body{
+  text-align: center;
+}
+
+.card2-body{
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}
+
+.card2-body::after{
+  box-sizing: border-box;
+}
+
+.card2-body::before{
+  box-sizing: border-box;
+}
+
+.card2{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.shadow-sm{
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+button.btn.btn-submit{
+  width: 346px;
+  color: #fff;
+  background-color: #20AE64;
+}
+
+div.rbc-calendar{
+  padding: 20px;
 }

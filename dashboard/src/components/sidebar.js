@@ -9,7 +9,7 @@ const Sidebar = () => {
           <Link to="/" className="brand-wrap">
             <img
               src="/images/logo.png"
-              style={{ width: 1000, height: 90 }}
+              style={{width: 1000, height: 90}}
               className="logo"
               alt="HR 360 Icon"
             />
