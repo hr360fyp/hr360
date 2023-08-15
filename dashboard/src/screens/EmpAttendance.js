@@ -10,7 +10,7 @@ const Attendance = () => {
 
   useEffect(() => {
     axios
-      .get("/api/attendance")
+      .get("https://hr-360.vercel.app/attendance")
       .then((res) => {
         setAttendances(res.data);
       })
