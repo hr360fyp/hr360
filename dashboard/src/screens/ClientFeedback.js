@@ -24,7 +24,7 @@ export default class Feedback extends Component {
   
 
   componentDidMount(){
-    axios.get("/api/users/getusers")
+    axios.get("https://hr-360.vercel.app/users/getusers")
     .then((res)=>{
       console.log("res",res)
       const users = res.data
@@ -43,7 +43,7 @@ export default class Feedback extends Component {
       () => {
         const { recipient } = this.state;
         axios
-          .get(`/messages/${recipient}`)
+          .get(`https://hr-360.vercel.app/messages/${recipient}`)
           .then((response) => {
             const messages = response.data;
             this.setState({ messages });
@@ -68,7 +68,7 @@ export default class Feedback extends Component {
     };
 
     axios
-      .post("/messages", newMessage)
+      .post("https://hr-360.vercel.app/messages", newMessage)
       .then(() => {
         this.setState((prevState) => ({
           messages: [...prevState.messages, newMessage],

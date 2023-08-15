@@ -44,7 +44,7 @@ const AddAttendance = () => {
     }
 
     try {
-      await axios.post("/api/attendance", { attendanceData });
+      await axios.post("https://hr-360.vercel.app/attendance", { attendanceData });
       toast.success("New Attendance Added", ToastObjects);
       // Clear error
       setError("");

@@ -8,7 +8,7 @@ const Payroll = () => {
 
   useEffect(() => {
     axios
-      .get("/api/products/")
+      .get("https://hr-360.vercel.app/products/")
       .then((res) => {
         console.log("res", res);
         setProducts(res.data.products);
