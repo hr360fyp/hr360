@@ -34,6 +34,27 @@ const EditOrderMain = (props) => {
   const orderEdit = useSelector((state) => state.orderEdit);
   const { loading, error, order } = orderEdit;
 
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setName(filteredValue);
+  };
+
+  const handleHeadChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setHead(filteredValue);
+  };
+
+  const handlePstatusChange = (e) => {
+    const inputValue = e.target.value;
+    // Allow only alphabets and spaces using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setPstatus(filteredValue);
+  };
+
   const orderUpdate = useSelector((state) => state.orderUpdate);
   const {
     loading: loadingUpdate,
@@ -118,7 +139,7 @@ const EditOrderMain = (props) => {
                       id="department_title"
                       required
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={handleNameChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -132,7 +153,7 @@ const EditOrderMain = (props) => {
                       id="department_head"
                       required
                       value={head}
-                      onChange={(e) => setHead(e.target.value)}
+                      onChange={handleHeadChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
@@ -140,7 +161,7 @@ const EditOrderMain = (props) => {
                       Total Employees
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       placeholder="Type here"
                       className="form-control"
                       id="department_temp"
@@ -202,7 +223,7 @@ const EditOrderMain = (props) => {
                       id="department_pstatus"
                       required
                       value={pstatus}
-                      onChange={(e) => setPstatus(e.target.value)}
+                      onChange={handlePstatusChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                     </>

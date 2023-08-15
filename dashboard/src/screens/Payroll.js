@@ -50,8 +50,8 @@ const Payroll = () => {
                     <td>{product.name}</td>
                     <td>{product.email}</td>
                     <td>{product.dept}</td>
-                    <td>{product.description}</td>
-                    <td>{product.countInStock}</td>
+                    <td>{product.designation}</td>
+                    <td>{product.salary}</td>
                   </tr>
                 ))
               ) : (

@@ -18,15 +18,36 @@ const AddProductMain = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [dept, setDept] = useState("");
-  const [price, setPrice] = useState(0);
+  const [experience, setExperience] = useState(0);
   const [image, setImage] = useState("");
-  const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
+  const [salary, setSalary] = useState(0);
+  const [designation, setDesignation] = useState("");
 
   const dispatch = useDispatch();
 
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
+
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setName(filteredValue);
+  };
+
+  const handleDeptChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDept(filteredValue);
+  };
+
+  const handleDesignationChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDesignation(filteredValue);
+  };
 
   useEffect(() => {
     if (product) {
@@ -35,16 +56,16 @@ const AddProductMain = () => {
       setName("");
       setEmail("");
       setDept("");
-      setDescription("");
-      setCountInStock(0);
+      setDesignation("");
+      setSalary(0);
       setImage("");
-      setPrice(0);
+      setExperience(0);
     }
   }, [product, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, email, dept, price, description, image, countInStock));
+    dispatch(createProduct(name, email, dept, experience, designation, image, salary));
   };
 
   return (
@@ -71,7 +92,7 @@ const AddProductMain = () => {
                   {error && <Message variant="alert-danger">{error}</Message>}
                   {loading && <Loading />}
                   <div className="mb-4">
-                    <label htmlFor="product_title" className="form-label">
+                    <label htmlFor="employee_title" className="form-label">
                       Employee Name
                     </label>
                     <input
@@ -81,11 +102,11 @@ const AddProductMain = () => {
                       id="product_title"
                       required
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={handleNameChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_email" className="form-label">
+                    <label htmlFor="employee_email" className="form-label">
                       Employee Email
                     </label>
                     <input
@@ -99,7 +120,7 @@ const AddProductMain = () => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_department" className="form-label">
+                    <label htmlFor="employee_department" className="form-label">
                       Employee Department
                     </label>
                     <input
@@ -109,35 +130,35 @@ const AddProductMain = () => {
                       id="product_department"
                       required
                       value={dept}
-                      onChange={(e) => setDept(e.target.value)}
+                      onChange={handleDeptChange} // Use the custom handler to filter non-alphabet characters
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_price" className="form-label">
+                    <label htmlFor="employee_experience" className="form-label">
                       Experience
                     </label>
                     <input
                       type="number"
                       placeholder="Type here"
                       className="form-control"
-                      id="product_price"
+                      id="employee_experience"
                       required
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
+                      value={experience}
+                      onChange={(e) => setExperience(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_salary" className="form-label">
+                    <label htmlFor="employee_salary" className="form-label">
                       Salary
                     </label>
                     <input
                       type="number"
                       placeholder="Type here"
                       className="form-control"
-                      id="product_salary"
+                      id="employee_salary"
                       required
-                      value={countInStock}
-                      onChange={(e) => setCountInStock(e.target.value)}
+                      value={salary}
+                      onChange={(e) => setSalary(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -146,8 +167,8 @@ const AddProductMain = () => {
                       placeholder="Type here"
                       className="form-control"
                       required
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      value={designation}
+                      onChange={handleDesignationChange} // Use the custom handler to filter non-alphabet characters
                     ></textarea>
                   </div>
                   <div className="mb-4">

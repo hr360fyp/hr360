@@ -19,6 +19,7 @@ const AddAttendance = () => {
   const products = useSelector(({ productList }) => productList.products);
 
   const [error, setError] = useState("");
+  const [month, setMonth] = useState("");
 
   const handlePublishNow = async () => {
     const attendanceData = products.map((product) => {
@@ -31,6 +32,7 @@ const AddAttendance = () => {
         employeeName: product.name,
         employeeEmail: product.email,
         attendance: attendanceValue,
+        month: month, // Add the selected month to the attendance data
       };
     });
 
@@ -53,6 +55,7 @@ const AddAttendance = () => {
       setError("Failed to save attendance.");
     }
   };
+
 
   return (
     <>
@@ -77,6 +80,31 @@ const AddAttendance = () => {
               </button>
             </div>
           </div>
+          <div>
+        <select
+          id="ticket_asgnto"
+          className="form-control2"
+          required
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+        >
+          <option id="" value="">
+            Select month
+          </option>
+          <option value="(January)">January</option>
+          <option value="(February)">February</option>
+          <option value="(March)">March</option>
+          <option value="(April)">April</option>
+          <option value="(May)">May</option>
+          <option value="(June)">June</option>
+          <option value="(July)">July</option>
+          <option value="(August)">August</option>
+          <option value="(September)">September</option>
+          <option value="(October)">October</option>
+          <option value="(November)">November</option>
+          <option value="(December)">December</option>
+        </select>
+      </div>
         </section>
         <div className="att-header">
           <table className="table2">
@@ -84,7 +112,7 @@ const AddAttendance = () => {
               <tr>
                 <th>Employee Name</th>
                 <th>Employee Email</th>
-                <th>Attendance (Month)</th>
+                <th>Attendance {month}</th>
               </tr>
             </thead>
             <tbody>

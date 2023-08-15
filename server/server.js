@@ -39,6 +39,7 @@ db.once("open", () => {
 // Define message schema
 const messageSchema = new mongoose.Schema({
   recipient: String,
+  sender: String, // Add the sender field to the schema
   message: String,
   timestamp: String,
 });
@@ -48,10 +49,11 @@ const Message = mongoose.model("Message", messageSchema);
 
 // Save a new message to MongoDB
 app.post("/messages", (req, res) => {
-  const { recipient, message, timestamp } = req.body;
+  const { recipient, sender, message, timestamp } = req.body;
 
   const newMessage = new Message({
     recipient,
+    sender,
     message,
     timestamp,
   });
@@ -65,6 +67,7 @@ app.post("/messages", (req, res) => {
     }
   });
 });
+
 // Retrieve messages for a specific recipient
 app.get("/messages/:recipient", (req, res) => {
   const recipient = req.params.recipient;
@@ -169,7 +172,8 @@ app.post("/messages", (req, res) => {
 const attendanceSchema = new mongoose.Schema({
   employeeName: String,
   employeeEmail: String,
-  attendance: Number, // Change the type to Number
+  attendance: Number,
+  month: String,
 });
 
 // Create an Attendance model
@@ -179,42 +183,24 @@ const Attendance = mongoose.model("Attendance", attendanceSchema);
 app.post("/api/attendance", (req, res) => {
   const { attendanceData } = req.body;
 
-  // Check if any radio button is empty
-  const isAnyEmpty = attendanceData.some(
-    (attendance) => attendance.attendance === ""
+  // Check if any attendance data is empty or missing
+  const isAnyInvalid = attendanceData.some(
+    (attendance) =>
+      attendance.attendance === undefined || attendance.month === undefined
   );
-  if (isAnyEmpty) {
+  if (isAnyInvalid) {
     return res
       .status(400)
-      .json({ error: "Please fill all the radio buttons." });
+      .json({ error: "Please fill all the radio buttons and select a month." });
   }
 
-  // Create an array of attendance documents
-  const attendanceDocuments = attendanceData.map((attendance) => ({
-    employeeName: attendance.employeeName,
-    employeeEmail: attendance.employeeEmail,
-    attendance: attendance.attendance,
-  }));
-
   // Save the attendance documents to the database
-  Attendance.insertMany(attendanceDocuments, (err, savedAttendance) => {
+  Attendance.insertMany(attendanceData, (err, savedAttendance) => {
     if (err) {
       console.log(err);
       res.status(500).json({ error: "Failed to save attendance." });
     } else {
       res.json(savedAttendance);
-    }
-  });
-});
-
-app.get("/api/attendance", (req, res) => {
-  Attendance.find({}, (err, attendanceData) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: "Failed to fetch attendance data." });
-    } else {
-      console.log(attendanceData);
-      res.json(attendanceData);
     }
   });
 });
@@ -230,7 +216,7 @@ app.get("/getusers",
   // const user = await User.find({});
   res.json(user.name);
 }
-// )
+// 
 );
 
 // ERROR HANDLER

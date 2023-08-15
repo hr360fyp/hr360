@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import Toast from "../LoadingError/Toast";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editTicket,
-  updateTicket,
-} from "../../Redux/Actions/TicketActions";
+import { editTicket, updateTicket } from "../../Redux/Actions/TicketActions";
 import { TICKET_UPDATE_RESET } from "../../Redux/Constants/TicketConstants";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
@@ -30,11 +27,39 @@ const EditTicketMain = (props) => {
 
   const dispatch = useDispatch();
 
-  const products = useSelector(({productList}) => productList.products)
-  console.log("products",products)
+  const products = useSelector(({ productList }) => productList.products);
+  console.log("products", products);
 
   const ticketEdit = useSelector((state) => state.ticketEdit);
   const { loading, error, ticket } = ticketEdit;
+
+  const handleDescriptionChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setDescription(filteredValue);
+  };
+
+  const handlePriorityChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setPriority(filteredValue);
+  };
+
+  const handleCreatedByChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setCreatedBy(filteredValue);
+  };
+
+  const handleStatusChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove non-alphabet characters using a regular expression
+    const filteredValue = inputValue.replace(/[^A-Za-z\s]/g, "");
+    setStatus(filteredValue);
+  };
 
   const ticketUpdate = useSelector((state) => state.ticketUpdate);
   const {
@@ -54,7 +79,7 @@ const EditTicketMain = (props) => {
         setDescription(ticket.description);
         setPriority(ticket.priority);
         setCreatedBy(ticket.crtby);
-        setAsgnto(ticket.asgnto)
+        setAsgnto(ticket.asgnto);
         setDeadline(ticket.deadline);
         setStatus(ticket.status);
       }
@@ -118,7 +143,7 @@ const EditTicketMain = (props) => {
                           id="ticket_desc"
                           required
                           value={description}
-                          onChange={(e) => setDescription(e.target.value)}
+                          onChange={handleDescriptionChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>
                       <div className="mb-4">
@@ -132,7 +157,7 @@ const EditTicketMain = (props) => {
                           id="ticket_priority"
                           required
                           value={priority}
-                          onChange={(e) => setPriority(e.target.value)}
+                          onChange={handlePriorityChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>
                       <div className="mb-4">
@@ -143,10 +168,10 @@ const EditTicketMain = (props) => {
                           type="text"
                           placeholder="Type here"
                           className="form-control"
-                          id="ticket_ctdby"
+                          id="ticket_crtby"
                           required
                           value={crtby}
-                          onChange={(e) => setCreatedBy(e.target.value)}
+                          onChange={handleCreatedByChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>
                       <div className="mb-4">
@@ -155,12 +180,14 @@ const EditTicketMain = (props) => {
                         </label>
                         <select
                           id="ticket_asgnto"
-                          className="form-control"
+                          className="form-control2"
                           required
                           value={asgnto}
                           onChange={(e) => setAsgnto(e.target.value)}
                         >
-                          <option value="">Select an option</option>
+                          <option id="" value="">
+                            Select an Employee
+                          </option>
                           {products.map((product) => (
                             <option key={product._id} value={product.name}>
                               {product.name}
@@ -173,7 +200,7 @@ const EditTicketMain = (props) => {
                           Deadline
                         </label>
                         <input
-                          type="text"
+                          type="date"
                           placeholder="Type here"
                           className="form-control"
                           id="ticket_deadline"
@@ -193,7 +220,7 @@ const EditTicketMain = (props) => {
                           id="ticket_status"
                           required
                           value={status}
-                          onChange={(e) => setStatus(e.target.value)}
+                          onChange={handleStatusChange} // Use the custom handler to filter non-alphabet characters
                         />
                       </div>
                     </>

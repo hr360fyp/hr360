@@ -18,15 +18,15 @@ const Product = (props) => {
       <div className="col-md-6 col-sm-6 col-lg-3 mb-5">
         <div className="card card-product-grid shadow-sm">
           <Link to="#" className="mb-2 img-wrap">
-            <img src={product.image} alt="Product" />
+            <img src={product.image} alt="Employee" />
           </Link>
           <div className="info-wrap">
             <div className="title text-truncate mb-2">Name: {product.name}</div>
             <div className="title text-truncate mb-2">Email: {product.email}</div>
             <div className="title text-truncate mb-2">Department: {product.dept}</div>
-            <div className="title text-truncate mb-2">Experience: {product.price}</div>
-            <div className="title text-truncate mb-2">Salary: Rs.{product.countInStock}</div>
-            <div className="title text-truncate mb-4">Job Designation: {product.description}</div>
+            <div className="title text-truncate mb-2">Experience: {product.experience}</div>
+            <div className="title text-truncate mb-2">Salary: Rs.{product.salary}</div>
+            <div className="title text-truncate mb-4">Job Designation: {product.designation}</div>
             <div className="row">
               <Link
                 to={`/product/${product._id}/edit`}

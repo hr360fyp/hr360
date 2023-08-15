@@ -1,4 +1,4 @@
-import React,{ Component} from "react";
+import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import EmpHeader from "../components/EmpHeader";
@@ -6,16 +6,15 @@ import EmpSidebar from "../components/EmpSidebar";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import axios from "axios";
- 
 
 export default class Feedback extends Component {
-
   state = {
     editorState: EditorState.createEmpty(),
     recipient: "",
     messages: [],
-    users:[],
+    users: [],
   };
+
   onEditorStateChange = (editorState) => {
     this.setState({
       editorState,
@@ -68,7 +67,7 @@ export default class Feedback extends Component {
     };
 
     axios
-      .post("/messages", newMessage) // Sending the new message to the server
+      .post("/messages", newMessage)
       .then(() => {
         this.setState((prevState) => ({
           messages: [...prevState.messages, newMessage],
@@ -96,44 +95,47 @@ export default class Feedback extends Component {
           </section>
           <main className="searchform">
             <div className="message-area">
-            {messages.map((msg, index) => (
-              <div className="messages" key={index} >
-                <span> {msg.recipient}: {msg.message} {msg.timestamp}</span>
-              </div>
-            ))}
+              {messages.map((msg, index) => (
+                <div className="messages" key={index}>
+                  <span>
+                    {msg.recipient}: {" "}
+                    {msg.message.replace(/<\/?[^>]+(>|$)/g, "")} {msg.timestamp}
+                  </span>
+                </div>
+              ))}
             </div>
-            </main>
+          </main>
           <div className="text-area">
-          <div className="input-group">
+            <div className="input-group">
               <select id="recipient" onChange={this.handleRecipientChange}>
-                {users.map((user) =>{
-                  return(
-                    <option value={user.name} key={user._id}>{user.name}</option>
-                  )
+                {users.map((user) => {
+                  return (
+                    <option value={user.name} key={user._id}>
+                      {user.name}
+                    </option>
+                  );
                 })}
               </select>
-              
             </div>
-            
-          <Editor
-            editorState={editorState}
-            placeholder="Type Message Here..."
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            onEditorStateChange={this.onEditorStateChange}
-          />
-          <button
-            onClick={this.handleSendMessage}
-            className="send-button"
-            style={{ backgroundColor: "rgb(32, 174, 100)" }}
-          >
-            Send
-          </button>
+
+            <Editor
+              editorState={editorState}
+              placeholder="Type Message Here..."
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+              onEditorStateChange={this.onEditorStateChange}
+            />
+            <button
+              onClick={this.handleSendMessage}
+              className="send-button"
+              style={{ backgroundColor: "rgb(32, 174, 100)" }}
+            >
+              Send
+            </button>
           </div>
-          
         </main>
       </>
-    )
+    );
   }
 }

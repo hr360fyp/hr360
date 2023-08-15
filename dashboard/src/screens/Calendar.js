@@ -1,4 +1,3 @@
-// Calendar1.js
 import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -20,18 +19,38 @@ const Calendar1 = () => {
     axios
       .get("/api/events")
       .then((response) => {
-        setEvents(response.data);
+        // Make sure the response data is in the correct format for react-big-calendar
+        const formattedEvents = response.data.map((event) => ({
+          ...event,
+          start: new Date(event.start),
+          end: new Date(event.end),
+        }));
+        setEvents(formattedEvents);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
+  const isDateInPast = (date) => {
+    return moment(date).isBefore(moment(), "day");
+  };
+
   const handleEventAdd = (newEvent) => {
+    if (isDateInPast(newEvent.start)) {
+      alert("Cannot add events on previous dates.");
+      return;
+    }
+
     axios
       .post("/api/events", newEvent)
       .then((response) => {
-        setEvents([...events, response.data]);
+        const formattedEvent = {
+          ...response.data,
+          start: new Date(response.data.start),
+          end: new Date(response.data.end),
+        };
+        setEvents([...events, formattedEvent]);
       })
       .catch((error) => {
         console.error(error);
@@ -39,15 +58,16 @@ const Calendar1 = () => {
   };
 
   const handleEventUpdate = (updatedEvent) => {
-    if (updatedEvent.title === "") {
-      // If the updated title is blank, delete the event
-      handleEventDelete(updatedEvent);
-    } 
-    else if (updatedEvent.title === null){
-      // If the updated title is null, do not perform any action
+    if (isDateInPast(updatedEvent.start)) {
+      alert("Cannot update events to previous dates.");
       return;
     }
-    else {
+
+    if (updatedEvent.title === "") {
+      handleEventDelete(updatedEvent);
+    } else if (updatedEvent.title === null) {
+      return;
+    } else {
       axios
         .put(`/api/events/${updatedEvent._id}`, updatedEvent)
         .then((response) => {
@@ -113,7 +133,6 @@ const Calendar1 = () => {
               handleEventUpdate(updatedEvent);
             }}
             onSelecting={(range) => {
-              // Prevent selecting multiple days
               return range.start === range.end;
             }}
             onDoubleClickEvent={(event) => {
@@ -123,7 +142,7 @@ const Calendar1 = () => {
                 handleEventDelete(event);
               }
             }}
-            style={{ height: "520px", padding: "20px"}}
+            style={{ height: "520px", padding: "20px" }}
           />
         </main>
       </div>
