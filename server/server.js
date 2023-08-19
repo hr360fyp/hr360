@@ -12,15 +12,15 @@ import mongoose from "mongoose";
 dotenv.config();
 connectDatabase();
 const cors = require('cors')
+const express = require('express');
 const app = express();
-app.use(cors(
-  {
-    origin: ["https://hr360.vercel.app"],
-    methods: ["POST, GET, OPTIONS, PUT, DELETE"],
-    allowedHeaders: ["Content-Type', X-Auth-Token, Origin, Authorization"],
-    credentials: true
-  }
-));
+// Enable CORS for all routes
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*'); // '*' allows any origin, you can restrict it to specific origins
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 app.use(express.json());
 
 // API
