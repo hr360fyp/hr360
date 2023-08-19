@@ -15,7 +15,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors(
   {
-    origin: ["https://hr360.vercel.app/login"],
+    origin: ["https://hr360.vercel.app"],
     methods: ["POST", "GET, OPTIONS, PUT, DELETE"],
     allowedHeaders: ["Content-Type', X-Auth-Token, Origin, Authorization"],
     credentials: true
