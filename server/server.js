@@ -11,12 +11,12 @@ import mongoose from "mongoose";
 
 dotenv.config();
 connectDatabase();
-const cors = require('cors');
+const cors = require('cors')
 const app = express();
 app.use(cors(
   {
     origin: ["https://hr360.vercel.app"],
-    methods: ["POST", "GET, OPTIONS, PUT, DELETE"],
+    methods: ["POST, GET, OPTIONS, PUT, DELETE"],
     allowedHeaders: ["Content-Type', X-Auth-Token, Origin, Authorization"],
     credentials: true
   }
@@ -30,8 +30,12 @@ app.use("https://hr-360.vercel.app/registers", userRouter);
 app.use("https://hr-360.vercel.app/users", userRouter);
 app.use("https://hr-360.vercel.app/orders", orderRouter);
 app.use("https://hr-360.vercel.app/tickets", ticketRouter);
-app.get("https://hr-360.vercel.app/config/paypal", (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID);
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
 });
 
 // Define message schema
