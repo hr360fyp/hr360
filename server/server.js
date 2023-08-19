@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import connectDatabase from "./config/MongoDb.js";
 import ImportData from "./DataImport.js";
@@ -15,21 +16,16 @@ const cors = require('cors')
 const express = require('express');
 const app = express();
 // Enable CORS for all routes
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*'); // '*' allows any origin, you can restrict it to specific origins
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+app.use(cors());
 app.use(express.json());
 
 // API
-app.use("https://hr-360.vercel.app/import", ImportData);
-app.use("https://hr-360.vercel.app/products", productRoute);
-app.use("https://hr-360.vercel.app/registers", userRouter);
-app.use("https://hr-360.vercel.app/users", userRouter);
-app.use("https://hr-360.vercel.app/orders", orderRouter);
-app.use("https://hr-360.vercel.app/tickets", ticketRouter);
+app.use("/import", ImportData);
+app.use("/products", productRoute);
+app.use("/registers", userRouter);
+app.use("/users", userRouter);
+app.use("/orders", orderRouter);
+app.use("/tickets", ticketRouter);
 });
 
 const db = mongoose.connection;
