@@ -11,12 +11,13 @@ import mongoose from "mongoose";
 
 dotenv.config();
 connectDatabase();
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 app.use(cors(
   {
     origin: ["https://hr360.vercel.app/login"],
-    methods: ["POST","GET"],
+    methods: ["POST", "GET, OPTIONS, PUT, DELETE"],
+    allowedHeaders: ["Content-Type', X-Auth-Token, Origin, Authorization"],
     credentials: true
   }
 ));
