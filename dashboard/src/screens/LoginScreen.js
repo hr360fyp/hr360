@@ -95,7 +95,7 @@ const Login = ({ history }) => {
             <div className="captcha mb-4">
               <ReCAPTCHA
                 ref={captchaRef}
-                sitekey="6LfalaUmAAAAACIC-9s8wFy8o0cN1n5EZExAVPKY"
+                sitekey="6LeKsKonAAAAADDPyp1G52lFkWvs6-cX4_7xrIwB"
                 onChange={handleCaptchaChange}
               />
             </div>
