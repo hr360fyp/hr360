@@ -11,28 +11,20 @@ import mongoose from "mongoose";
 
 dotenv.config();
 connectDatabase();
-const cors = require('cors');
 const app = express();
-app.use(cors(
-  {
-    origin: ["https://hr360.vercel.app/login"],
-    methods: ["POST", "GET, OPTIONS, PUT, DELETE"],
-    allowedHeaders: ["Content-Type', X-Auth-Token, Origin, Authorization"],
-    credentials: true
-  }
-));
 app.use(express.json());
 
 // API
-app.use("https://hr-360.vercel.app/import", ImportData);
-app.use("https://hr-360.vercel.app/products", productRoute);
-app.use("https://hr-360.vercel.app/registers", userRouter);
-app.use("https://hr-360.vercel.app/users", userRouter);
-app.use("https://hr-360.vercel.app/orders", orderRouter);
-app.use("https://hr-360.vercel.app/tickets", ticketRouter);
-app.get("https://hr-360.vercel.app/config/paypal", (req, res) => {
+app.use("/api/import", ImportData);
+app.use("/api/products", productRoute);
+app.use("/api/registers", userRouter);
+app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/tickets", ticketRouter);
+app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
 
 // Define message schema
 const messageSchema = new mongoose.Schema({
@@ -89,7 +81,7 @@ const eventSchema = new mongoose.Schema({
 const Event = mongoose.model("Event", eventSchema);
 
 // Save a new event
-app.post("https://hr-360.vercel.app/events", (req, res) => {
+app.post("/api/events", (req, res) => {
   const { title, start, end } = req.body;
   const newEvent = new Event({
     title,
@@ -107,7 +99,7 @@ app.post("https://hr-360.vercel.app/events", (req, res) => {
 });
 
 // Retrieve all events
-app.get("https://hr-360.vercel.app/events", (req, res) => {
+app.get("/api/events", (req, res) => {
   Event.find({}, (err, events) => {
     if (err) {
       console.error(err);
@@ -119,7 +111,7 @@ app.get("https://hr-360.vercel.app/events", (req, res) => {
 });
 
 // Update an event
-app.put("https://hr-360.vercel.app/events/:eventId", (req, res) => {
+app.put("/api/events/:eventId", (req, res) => {
   const { eventId } = req.params;
   const { title } = req.body;
   Event.findByIdAndUpdate(
@@ -138,7 +130,7 @@ app.put("https://hr-360.vercel.app/events/:eventId", (req, res) => {
 });
 
 // Delete an event
-app.delete("https://hr-360.vercel.app/events/:eventId", (req, res) => {
+app.delete("/api/events/:eventId", (req, res) => {
   const { eventId } = req.params;
   Event.findByIdAndRemove(eventId, (err) => {
     if (err) {
@@ -177,7 +169,7 @@ const attendanceSchema = new mongoose.Schema({
 const Attendance = mongoose.model("Attendance", attendanceSchema);
 
 // API route to save attendance
-app.post("https://hr-360.vercel.app/attendance", (req, res) => {
+app.post("/api/attendance", (req, res) => {
   const { attendanceData } = req.body;
 
   // Check if any radio button is empty
@@ -208,7 +200,7 @@ app.post("https://hr-360.vercel.app/attendance", (req, res) => {
   });
 });
 
-app.get("https://hr-360.vercel.app/attendance", (req, res) => {
+app.get("/api/attendance", (req, res) => {
   Attendance.find({}, (err, attendanceData) => {
     if (err) {
       console.log(err);
