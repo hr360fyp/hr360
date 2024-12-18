@@ -12,7 +12,6 @@ userRouter.post(
   asyncHandler(async (req, res) => {
     const { role, email, password } = req.body;
     const user = await User.findOne({ role, email });
-
     if (role === "Admin" && user && (await user.matchPassword(password))) {
       res.json({
         _id: user._id,

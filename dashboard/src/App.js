@@ -28,20 +28,20 @@ import { listProducts } from "./Redux/Actions/ProductActions";
 import { listOrders } from "./Redux/Actions/OrderActions";
 import { listTickets } from "./Redux/Actions/TicketActions";
 import Register from "./screens/Register";
-import EmpHomeScreen from "./screens/EmpHomeScreen"
-import EmpAttendance from "./screens/EmpAttendance"
-import EmpFeedback from "./screens/EmpFeedback"
+import EmpHomeScreen from "./screens/EmpHomeScreen";
+import EmpAttendance from "./screens/EmpAttendance";
+import EmpFeedback from "./screens/EmpFeedback";
 import EmpCalendar1 from "./screens/EmpCalendar";
-import ClientHomeScreen from "./screens/ClientHomeScreen"
-import ClientFeedback from "./screens/ClientFeedback"
-
+import ClientHomeScreen from "./screens/ClientHomeScreen";
+import ClientFeedback from "./screens/ClientFeedback";
 
 function App() {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo) {
       dispatch(listProducts());
       dispatch(listOrders());
       dispatch(listTickets());
@@ -52,40 +52,36 @@ function App() {
     <>
       <Router>
         <Switch>
-          <PrivateRouter path="/" component={HomeScreen} exact />
-          <PrivateRouter path="/register" component={Register} />
-          <PrivateRouter path="/products" component={ProductScreen} />
-          <PrivateRouter path="/orders" component={OrderScreen} />
-          <PrivateRouter path="/addproduct" component={AddProduct} />
-          <PrivateRouter path="/addorder" component={AddOrder} />
-          <PrivateRouter path="/tickets" component={TicketScreen} />
-          <PrivateRouter path="/Tickt" component={TicketScrn} />
-          <PrivateRouter path="/Tckt" component={TcktScreen} />
-          <PrivateRouter path="/addticket" component={AddTicket} />
-          <PrivateRouter path="/attendance" component={Attendance} />
-          <PrivateRouter path="/addattendance" component={AddAttendance} />
-          <PrivateRouter path="/Calendar" component={Calendar1} />
-          <PrivateRouter path="/Payroll" component={Payroll} />
-          <PrivateRouter path="/Feedback" component={Feedback} />
-          <PrivateRouter path="/emp" component={EmpHomeScreen} exact />
-          <PrivateRouter path="/EmpAttendance" component={EmpAttendance} />
-          <PrivateRouter path="/EmpFeedback" component={EmpFeedback} />
-          <PrivateRouter path="/EmpCalendar" component={EmpCalendar1} />
-          <PrivateRouter path="/client" component={ClientHomeScreen} exact />
-          <PrivateRouter path="/ClientFeedback" component={ClientFeedback} />
+          {/* Admin routes */}
+          <PrivateRouter path="/" component={HomeScreen} exact roles={["Admin"]} />
+          <PrivateRouter path="/register" component={Register} roles={["Admin"]} />
+          <PrivateRouter path="/products" component={ProductScreen} roles={["Admin"]} />
+          <PrivateRouter path="/orders" component={OrderScreen} roles={["Admin"]} />
+          <PrivateRouter path="/addproduct" component={AddProduct} roles={["Admin"]} />
+          <PrivateRouter path="/addorder" component={AddOrder} roles={["Admin"]} />
+          <PrivateRouter path="/tickets" component={TicketScreen} roles={["Admin"]} />
+          <PrivateRouter path="/addticket" component={AddTicket} roles={["Admin"]} />
+          <PrivateRouter path="/payroll" component={Payroll} roles={["Admin"]} />
+          <PrivateRouter path="/feedback" component={Feedback} roles={["Admin"]} />
+          <PrivateRouter path="/addattendance" component={AddAttendance} roles={["Admin"]} />
+          <PrivateRouter path="/attendance" component={Attendance} roles={["Admin"]} />
+          <PrivateRouter path="/calendar" component={Calendar1} roles={["Admin"]} />
+          <PrivateRouter path="/product/:id/edit" component={ProductEditScreen} roles={["Admin"]} />
+          <PrivateRouter path="/order/:id/edit" component={OrderEditScreen} roles={["Admin"]} />
+          <PrivateRouter path="/ticket/:id/edit" component={TicketEditScreen} roles={["Admin"]} />
 
-          <PrivateRouter
-            path="/product/:id/edit"
-            component={ProductEditScreen}
-          />
-          <PrivateRouter
-            path="/order/:id/edit"
-            component={OrderEditScreen}
-          />
-          <PrivateRouter
-            path="/ticket/:id/edit"
-            component={TicketEditScreen}
-          />
+          {/* Client routes */}
+          <PrivateRouter path="/Tickt" component={TicketScrn} roles={["Client"]} />
+          <PrivateRouter path="/client" component={ClientHomeScreen} exact roles={["Client"]} />
+          <PrivateRouter path="/clientfeedback" component={ClientFeedback} roles={["Client"]} />
+          {/* Employee routes */}
+          <PrivateRouter path="/emp" component={EmpHomeScreen} exact roles={"Employee"} />
+          <PrivateRouter path="/Tckt" component={TcktScreen} roles={["Employee"]} />          
+          <PrivateRouter path="/empattendance" component={EmpAttendance} roles={["Employee"]} />
+          <PrivateRouter path="/empfeedback" component={EmpFeedback} roles={["Employee"]} />
+          <PrivateRouter path="/empcalendar" component={EmpCalendar1} roles={["Employee"]} />
+
+          {/* Public routes */}
           <Route path="/login" component={Login} />
           <PrivateRouter path="*" component={NotFound} />
         </Switch>

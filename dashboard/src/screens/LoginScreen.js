@@ -6,13 +6,13 @@ import { login } from "../Redux/Actions/userActions";
 import Message from "./../components/LoadingError/Error";
 import ReCAPTCHA from "react-google-recaptcha";
 
-
 const Login = ({ history }) => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [captchaResponse, setCaptchaResponse] = useState("");
   const [error, setError] = useState("");
+  const [loginPressed, setLoginPressed] = useState(false);
 
   const dispatch = useDispatch();
   const captchaRef = useRef(null);
@@ -21,14 +21,14 @@ const Login = ({ history }) => {
   const { loading, userInfo } = userLogin;
 
   useEffect(() => {
-    if (role === "Admin" && userInfo) {
+    if (role === "Admin" && loginPressed === true &&  userInfo ) {
       history.push("/");
-    } else if (role === "Employee" && userInfo) {
+    } else if (role === "Employee" && loginPressed === true &&  userInfo) {
       history.push("/emp");
-    } else if (role === "Client" && userInfo) {
+    } else if (role === "Client" && loginPressed === true &&  userInfo) {
       history.push("/client");
-    }
-  }, [role, userInfo, history]);
+    } 
+  }, [email, password, role, userInfo, history]);
 
   const handleCaptchaChange = (response) => {
     setCaptchaResponse(response);
@@ -36,28 +36,37 @@ const Login = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (captchaResponse) {
-      dispatch(login(role, email, password));
-      captchaRef.current.reset();
-    } else {
-      setError("Please fill the reCAPTCHA first.");
-    }
+
+    // Password regex pattern with your requirements
+    const passwordPattern =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+
+    // if (captchaResponse) {
+      if (!password.match(passwordPattern)) {
+        setError(
+          "Password must be between 6 and 20 characters and contain at least one special character and one number."
+        );
+      } else {
+        setLoginPressed(true);
+        dispatch(login(role, email, password));
+        // captchaRef.current.reset();
+      }
+    
+    // else {
+    //   setError("Please fill the reCAPTCHA first.");
+    // }
   };
 
   return (
     <>
       <Toast />
-      <img
-        src="/images/logo.png"
-        className="logo1"
-        alt="HR 360 Icon"
-      />
+      <img src="/images/logo.png" className="logo1" alt="HR 360 Icon" />
       <div className="card shadow mx-auto" style={{ maxWidth: "380px" }}>
         <div className="card-body">
           {error && <Message variant="alert-danger">{error}</Message>}
           {loading && <Loading />}
           <h4 className="card-title mb-4 text-center">Sign in</h4>
-          <form onSubmit={submitHandler}>
+          <form method="POST" action="/login" onSubmit={submitHandler}>
             <div className="mb-3">
               <select
                 id="Role"
@@ -79,6 +88,7 @@ const Login = ({ history }) => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                maxLength="40" // Set the maximum length to 40 characters
               />
             </div>
 
@@ -89,6 +99,8 @@ const Login = ({ history }) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$"
+                title="Password must be between 6 and 20 characters and contain at least one letter, one number, and one special character (@$!%*#?&)"
               />
             </div>
 

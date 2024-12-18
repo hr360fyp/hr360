@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from 'cors';
 import connectDatabase from "./config/MongoDb.js";
 import ImportData from "./DataImport.js";
 import productRoute from "./Routes/ProductRoutes.js";
 import { errorHandler, notFound } from "./Middleware/Errors.js";
 import userRouter from "./Routes/UserRoutes.js";
-import orderRouter from "./Routes/orderRoutes.js";
+import orderRouter from "./Routes/OrderRoutes.js";
 import ticketRouter from "./Routes/TicketRoutes.js";
 import mongoose from "mongoose";
 
@@ -24,6 +25,7 @@ app.use("/api/tickets", ticketRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
 
 // Define message schema
 const messageSchema = new mongoose.Schema({
