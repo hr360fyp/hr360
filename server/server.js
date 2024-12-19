@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from 'cors';
 import connectDatabase from "./config/MongoDb.js";
 import ImportData from "./DataImport.js";
 import productRoute from "./Routes/ProductRoutes.js";
@@ -9,11 +8,26 @@ import userRouter from "./Routes/UserRoutes.js";
 import orderRouter from "./Routes/OrderRoutes.js";
 import ticketRouter from "./Routes/TicketRoutes.js";
 import mongoose from "mongoose";
+import cors from 'cors';
 
 dotenv.config();
 connectDatabase();
 const app = express();
 app.use(express.json());
+
+const corsOptions = {
+  origin: '*', // Allow all origins, you can specify your frontend origin if needed
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'content-type'], // added lowercase content-type for case sensitivity
+  credentials: true
+};
+
+// Use the cors middleware to handle CORS globally
+app.use(cors(corsOptions));
+
+// Allow preflight requests for all routes
+app.options('*', cors(corsOptions));
+
 
 // API
 app.use("/api/import", ImportData);
@@ -207,25 +221,25 @@ app.get("/api/attendance", (req, res) => {
       console.log(err);
       res.status(500).json({ error: "Failed to fetch attendance data." });
     } else {
-      console.log(attendanceData);
       res.json(attendanceData);
     }
   });
 });
 
-app.get("/getusers",(req,res)=>{
-  console.log("user req res",req)
-})
 
 app.get("/getusers",
-// asyncHandler(async 
   (req, res) => {
-  console.log("user req res",req)
-  // const user = await User.find({});
   res.json(user.name);
 }
-// )
 );
+
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    console.log('Response Headers:', res.getHeaders()); // Log the response headers to debug CORS
+  });
+  next();
+});
 
 // ERROR HANDLER
 app.use(notFound);
