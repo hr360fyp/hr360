@@ -10,47 +10,26 @@ const userRouter = express.Router();
 userRouter.post(
   "/login",
   asyncHandler(async (req, res) => {
+    console.log("Login request body:", req.body); // Debug log
     const { role, email, password } = req.body;
+
     const user = await User.findOne({ role, email });
-    if (role === "Admin" && user && (await user.matchPassword(password))) {
+    if (user && (await user.matchPassword(password))) {
+      console.log("User authenticated successfully."); // Debug log
       res.json({
         _id: user._id,
         role: user.role,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
         token: generateToken(user._id),
-        createdAt: user.createdAt,
       });
-    }
-    else if (role === "Employee" && user && (await user.matchPassword(password))) {
-      res.json({
-        _id: user._id,
-        role: user.role,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-        createdAt: user.createdAt,
-      });
-    } 
-    else if (role === "Client" && user && (await user.matchPassword(password))) {
-      res.json({
-        _id: user._id,
-        role: user.role,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-        createdAt: user.createdAt,
-      });
-    } 
-    else {
-      res.status(401);
-      throw new Error("Invalid Credentials");
+    } else {
+      console.log("Invalid credentials."); // Debug log
+      res.status(401).send("Invalid credentials");
     }
   })
 );
+
 
 // REGISTER
 userRouter.post(
