@@ -34,16 +34,14 @@ export const login = (role, email, password) => async (dispatch) => {
       config
     );
 
-    if (!data.isAdmin === true) {
-      toast.error("You are not Admin", ToastObjects);
-      dispatch({
-        type: USER_LOGIN_FAIL,
-      });
-    } else {
+    if (["Admin", "Employee", "Client"].includes(data.role)) {
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } else {
+      toast.error("You are not authorized", ToastObjects);
+      dispatch({ type: USER_LOGIN_FAIL });
     }
-
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    
   } catch (error) {
     const message =
       error.response && error.response.data.message

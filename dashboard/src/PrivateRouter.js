@@ -14,7 +14,7 @@ function PrivateRouter({ component: Component, roles, ...rest }) {
           return <Redirect to="/login" />;
         }
 
-        if (userInfo && userInfo.isAdmin && roles.includes(userInfo.role)) {
+        if (userInfo && roles.includes(userInfo.role)) {
           return <Component {...props} />;
         } else {
           localStorage.removeItem("userInfo");
